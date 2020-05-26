@@ -6,7 +6,7 @@ const expressSanitizer = require('express-sanitizer');
 
 router.use(expressSanitizer())
 
-//user routes
+//rotas dos utilizadores
 router.get("/users", userController.getUsers)
 router.get("/users/:id", userController.getUserByID)
 router.post("/users", userController.addUsers)

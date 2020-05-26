@@ -5,7 +5,7 @@ const expressSanitizer = require('express-sanitizer');
 
 router.use(expressSanitizer())
 
-//routes routes
+//rotas das... rotas
 router.get("/routes", routesController.getRoutes)
 router.get("/routes/:id", routesController.getRouteByID)
 router.post("/routes", routesController.addRoutes)

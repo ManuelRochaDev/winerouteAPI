@@ -5,7 +5,7 @@ const expressSanitizer = require('express-sanitizer');
 
 router.use(expressSanitizer())
 
-//categories routes
+//rotas das categorias
 router.get("/categories", categoriesController.getCategories)
 router.get("/categories/:id", categoriesController.getCategoryByID)
 router.post("/categories", categoriesController.addCategories)

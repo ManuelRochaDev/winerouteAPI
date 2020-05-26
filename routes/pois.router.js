@@ -5,7 +5,7 @@ const expressSanitizer = require('express-sanitizer');
 
 router.use(expressSanitizer())
 
-//pois routes
+//rotas dos pontos de interesse
 router.get("/pois", poisController.getPois)
 router.get("/pois/:id", poisController.getPoiByID)
 router.post("/pois", poisController.addPois)

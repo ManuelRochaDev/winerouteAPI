@@ -79,13 +79,16 @@ function loginUser(req, res) {
             let message = "success"
 
             if (target.length == 0) {
+                //o resultado da query é vazio
                 message = "user doesn't exist"
             } else {
                 if (!bcrypt.compareSync(password, target[0].password)) {
+                    //target[0] porque é um array com um único registo
                     message = "wrong password"
                 } else if (target[0].isblocked == 1) {
                     message = "user blocked"
                 } else {
+                    //se nenhuma das condições for verdade, o login é feito
                     message = "login successful"
                 }
             }
