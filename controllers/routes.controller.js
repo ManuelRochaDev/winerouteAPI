@@ -1,6 +1,5 @@
 const con = require("../database/connection");
 
-
 function getRoutes(req, res) {
     con.query(`SELECT * FROM route`, (qError, result) => {
         if (!qError) {

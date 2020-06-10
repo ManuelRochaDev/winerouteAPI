@@ -5,6 +5,8 @@ const expressSanitizer = require('express-sanitizer');
 
 router.use(expressSanitizer())
 
+
+
 //rotas das categorias
 router.get("/categories", categoriesController.getCategories)
 router.get("/categories/:id", categoriesController.getCategoryByID)

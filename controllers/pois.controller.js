@@ -1,5 +1,5 @@
 const con = require("../database/connection");
-
+const multer = require("multer");
 
 function getPois(req, res) {
     con.query(`SELECT * FROM pointofinterest`, (qError, result) => {
@@ -12,11 +12,19 @@ function getPois(req, res) {
 }
 
 function addPois(req, res) {
+    //just making sure there is no extra second changing the file name
+    let currentDate = Date.now();
     let lat = req.sanitize(req.body.lat);
     let long = req.sanitize(req.body.long);
     let name = req.sanitize(req.body.name);
-    let audiolink = req.sanitize(req.body.audiolink);
     let poi_img = req.sanitize(req.body.poi_img);
+
+    let uploading = multer({
+        dest: __dirname + '../public/audio/',
+        limits: {fileSize: 1000000, files:1},
+      })
+    
+    let audiolink = req.sanitize(currentDate);
 
     con.query(`INSERT INTO pointofinterest (lat, longitude, name, audiolink, poi_img) VALUES ('${lat}', '${long}', '${name}', '${audiolink}', '${poi_img}')`, (qError, result) => {
         if (!qError) {
@@ -36,7 +44,7 @@ function getPoiByID(req, res) {
         if (!qError) {
             return res.json(result[0]);
         } else
-        console.log(qError);
+            console.log(qError);
     });
 }
 
@@ -47,7 +55,7 @@ function deletePoi(req, res) {
         if (!qError) {
             return res.json(result);
         } else
-        console.log(qError);
+            console.log(qError);
     });
 }
 
@@ -55,5 +63,7 @@ module.exports = {
     getPois,
     getPoiByID,
     addPois,
-    deletePoi
+    deletePoi,
 }
+
+module.exports.uploading = uploading;

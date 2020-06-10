@@ -6,12 +6,18 @@ const app = express();
 
 app.use(express.json());
 
+var host = process.env.HOST || 'localhost';
+
 const port = process.env.PORT || 3000;
 
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
 
 //Queremos JSON
 app.use(bodyParser.json());
@@ -32,5 +38,14 @@ app.use(routesRouter);
 app.use(commentsRouter);
 app.use(poisRouter);
 app.use(categoriesRouter);
+
+/* var cors_proxy = require('cors-anywhere');
+cors_proxy.createServer({
+    originWhitelist: [], // Allow all origins
+    //requireHeader: ['origin', 'x-requested-with'],
+    //removeHeaders: ['cookie', 'cookie2']
+}).listen(port, host, function() {
+    console.log('Running CORS Anywhere on ' + host + ':' + port);
+}); */
 
 app.listen(port, () => console.log(`We're live on port ${port}`));
