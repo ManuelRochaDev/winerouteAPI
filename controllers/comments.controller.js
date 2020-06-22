@@ -15,12 +15,12 @@ function addComments(req, res) {
     let text = req.sanitize(req.body.text);
     let rating = req.sanitize(req.body.rating);
     let id_route = req.sanitize(req.body.id_route);
-    let id_user= req.sanitize(req.body.id_user);
-    
-    con.query(`INSERT INTO comment (text, rating, id_route, id_user) VALUES ('${text}', '${rating}', 0 ,0)`, (qError, result) => {
+    let id_user = req.sanitize(req.body.id_user);
+
+    con.query(`INSERT INTO comment (text, rating, id_route, id_user) VALUES ('${text}', '${rating}', '${id_route}' ,'${id_user}')`, (qError, result) => {
         if (!qError) {
             console.log("success");
-            return res.send(result);
+            return res.send("success");
         } else {
             console.log(qError);
         }
@@ -35,7 +35,7 @@ function getCommentByID(req, res) {
         if (!qError) {
             return res.json(result[0]);
         } else
-        console.log(qError);
+            console.log(qError);
     });
 }
 
@@ -46,7 +46,7 @@ function deleteComment(req, res) {
         if (!qError) {
             return res.json(result);
         } else
-        console.log(qError);
+            console.log(qError);
     });
 }
 
