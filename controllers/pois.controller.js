@@ -19,15 +19,11 @@ function addPois(req, res) {
     let name = req.sanitize(req.body.name);
     let poi_img = req.sanitize(req.body.poi_img);
 
-    let uploading = multer({
-        dest: __dirname + '../public/audio/',
-        limits: {fileSize: 1000000, files:1},
-      })
-    
     let audiolink = req.sanitize(currentDate);
-
+    let result = ""
     con.query(`INSERT INTO pointofinterest (lat, longitude, name, audiolink, poi_img) VALUES ('${lat}', '${long}', '${name}', '${audiolink}', '${poi_img}')`, (qError, result) => {
         if (!qError) {
+            result = "success"
             console.log("success");
             return res.send(result);
         } else {
@@ -65,5 +61,3 @@ module.exports = {
     addPois,
     deletePoi,
 }
-
-module.exports.uploading = uploading;

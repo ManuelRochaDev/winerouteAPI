@@ -4,11 +4,11 @@ const util = require("util");
 let connection;
 
 let config = {
-    host: "remotemysql.com",
+    host: "db4free.net",
     port: "3306",
-    user: "RnmQTIGoxJ",
+    user: "manuelrocha",
     password: "2J5w370Aau",
-    database: "RnmQTIGoxJ"
+    database: "wineroute"
 };
 
 function handleDisconnect() {

@@ -17,12 +17,15 @@ function addRoutes(req, res) {
     //let category = req.sanitize(req.body.category);
     //Falta ir buscar a categoria corretamente à BD
     let desc = req.sanitize(req.body.desc);
+    let routePois = JSON.stringify(req.body.routePois);
+    let time = req.sanitize(req.body.time);
+    let distance = req.sanitize(req.body.distance);
+    let audiolink = req.sanitize(req.body.audiolink)
 
-
-    con.query(`INSERT INTO route (difficulty, distance, time, title, city, id_category, id_user, description) VALUES ('${dif}', '0', '0', '${title}', '${city}', '0', '0', '${desc}')`, (qError, result) => {
+    con.query(`INSERT INTO route (difficulty, distance, time, title, city, id_category, id_user, description, routePois, audiolink) VALUES ('${dif}', '${distance}', '${time}', '${title}', '${city}', '0', '0', '${desc}', '${routePois}', '${audiolink}')`, (qError, result) => {
         if (!qError) {
             console.log("success");
-            return res.send(result);
+            return res.send("success");
         } else {
             console.log(qError);
         }

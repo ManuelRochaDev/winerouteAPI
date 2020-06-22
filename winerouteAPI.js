@@ -1,14 +1,27 @@
 const express = require('express');
+const cors = require('cors');
+const session = require('express-session');
 //para usar o req.body, body parsing
 const bodyParser = require('body-parser');
 
 const app = express();
+
+app.use(cors({
+    credentials: true,
+    origin: true
+}))
 
 app.use(express.json());
 
 var host = process.env.HOST || 'localhost';
 
 const port = process.env.PORT || 3000;
+
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}));
 
 app.use(bodyParser.urlencoded({
     extended: false
@@ -19,12 +32,10 @@ app.use((req, res, next) => {
     next();
 });
 
+
+
 //Queremos JSON
 app.use(bodyParser.json());
-
-//Penso não ser necessário o cors, foi inserido na altura ao tentar corrigir um erro não relacionado
-/* const cors = require('cors');
-app.use(cors()) */
 
 //rotas têm de vir no fim, senão há erros
 const userRouter = require("./routes/users.router");
