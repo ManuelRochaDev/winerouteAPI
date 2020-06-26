@@ -28,6 +28,48 @@ function addComments(req, res) {
     })
 }
 
+function addRating(req, res) {
+    let id_user = req.sanitize(req.body.id_user);
+    let rating_value = req.sanitize(req.body.rating_value);
+
+
+    con.query(`INSERT INTO rating (rating_value) VALUES ('${rating_value}')`, [rating_value, id_user], function (qError,
+        result) {
+        if (!qError) {
+            return res.send("rating updated");
+        } else
+            console.log(qError);
+    });
+}
+
+function updateRating(req, res) {
+    let id_user = req.sanitize(req.body.id_user);
+    let rating_value = req.sanitize(req.body.rating_value);
+
+
+    con.query("UPDATE rating SET rating_value = ? WHERE id_user = ?", [rating_value, id_user], function (qError,
+        result) {
+        if (!qError) {
+            return res.send("rating updated");
+        } else
+            console.log(qError);
+    });
+}
+
+function checkRating(req, res) {
+    let id_user = req.sanitize(req.body.id_user);
+    let result = ""
+
+    con.query("SELECT * FROM rating WHERE id_user = ?", id_user, function (qError,
+        result) {
+        if (!qError) {
+            result = res.json(result[0].rating_value);
+        } else
+            result = "no rating yet";
+    });
+    return (result)
+}
+
 function getCommentByID(req, res) {
     let id_comment = req.sanitize(req.params.id);
 
@@ -45,7 +87,7 @@ function deleteComment(req, res) {
     con.query("DELETE from comment WHERE id_comment = ?", id_comment, function (qError,
         result) {
         if (!qError) {
-            return res.json(result);
+            return res.json("comment deleted");
         } else
             console.log(qError);
     });
