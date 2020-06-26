@@ -61,10 +61,38 @@ function getUserByID(req, res) {
 }
 
 function updateUser(req, res) {
-    let id_user = req.sanitize(req.params.id);
+    let id_user = req.sanitize(req.body.id_user);
     let email = req.sanitize(req.body.email);
+    let name = req.sanitize(req.body.name);
+    let lastName = req.sanitize(req.body.lastName);
+    console.log(id_user)
+    console.log(email)
+    console.log(name)
+    console.log(lastName)
+    /* let password = bcrypt.hashSync(req.body.password, SALT_ROUNDS); */
 
-    con.query("UPDATE user SET email = ? WHERE id_user = ?", [email, id_user], function (qError,
+    if (email != null && name != null && lastName != null) {
+
+        con.query("UPDATE user SET email = ?, name = ?, lastName = ? WHERE id_user = ?", [email, name, lastName, id_user], function (qError,
+            result) {
+            if (!qError) {
+                res.send(result);
+            } else {
+                console.log(qError);
+            }
+        });
+
+    }else{
+        console.log("empty field");
+    }
+}
+
+function updatePassword(req, res) {
+    let password = bcrypt.hashSync(req.body.password, SALT_ROUNDS);
+    let id_user = req.sanitize(req.body.id_user);
+    console.log(id_user)
+
+    con.query("UPDATE user SET password = ? WHERE id_user = ?", [password, id_user], function (qError,
         result) {
         if (!qError) {
             res.send(result);
@@ -224,5 +252,6 @@ module.exports = {
     deleteUser,
     loginUser,
     blockUser,
-    upgradeUser
+    upgradeUser,
+    updatePassword
 }

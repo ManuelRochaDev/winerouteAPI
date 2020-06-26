@@ -16,8 +16,9 @@ function addComments(req, res) {
     let rating = req.sanitize(req.body.rating);
     let id_route = req.sanitize(req.body.id_route);
     let id_user = req.sanitize(req.body.id_user);
+    let commentDate = req.sanitize(req.body.commentDate);
 
-    con.query(`INSERT INTO comment (text, rating, id_route, id_user) VALUES ('${text}', '${rating}', '${id_route}' ,'${id_user}')`, (qError, result) => {
+    con.query(`INSERT INTO comment (text, rating, id_route, id_user, commentDate) VALUES ('${text}', '${rating}', '${id_route}' ,'${id_user}', '${commentDate}')`, (qError, result) => {
         if (!qError) {
             console.log("success");
             return res.send("success");

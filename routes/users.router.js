@@ -15,5 +15,6 @@ router.delete("/users/:id", userController.deleteUser)
 router.post("/login", userController.loginUser)
 router.put("/users/block/:id", userController.blockUser)
 router.put("/users/upgrade/:id", userController.upgradeUser)
+router.put("/users/updatepassword/:id", userController.updatePassword)
 
 module.exports = router

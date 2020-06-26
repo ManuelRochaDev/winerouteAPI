@@ -49,7 +49,7 @@ function deletePoi(req, res) {
     con.query("DELETE from pointofinterest WHERE id_pointofinterest = ?", id_poi, function (qError,
         result) {
         if (!qError) {
-            return res.json(result);
+            return res.json("success");
         } else
             console.log(qError);
     });

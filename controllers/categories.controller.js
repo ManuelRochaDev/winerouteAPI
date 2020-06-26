@@ -18,7 +18,7 @@ function addCategories(req, res) {
 
         if (!qError) {
             console.log("success");
-            return res.send(result);
+            return res.send("success");
         } else {
             console.log(qError);
         }
@@ -43,7 +43,7 @@ function deleteCategory(req, res) {
     con.query("DELETE from category WHERE id_category = ?", id_category, function (qError,
         result) {
         if (!qError) {
-            return res.json(result);
+            return res.json("success");
         } else
         console.log(qError);
     });
