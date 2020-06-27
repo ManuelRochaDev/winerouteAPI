@@ -56,7 +56,7 @@ function updateRoute(req, res) {
     con.query("UPDATE route SET title = ?, city = ?, difficulty = ?, routePois = ?, description = ?, audiolink = ? WHERE id_route = ?", [title, city, dif, routePois, desc, audiolink, id_route], function (qError,
         result) {
         if (!qError) {
-            res.send(result);
+            res.send("success");
         } else
             console.log(qError);
     });

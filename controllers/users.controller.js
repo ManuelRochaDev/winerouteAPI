@@ -76,7 +76,7 @@ function updateUser(req, res) {
         con.query("UPDATE user SET email = ?, name = ?, lastName = ? WHERE id_user = ?", [email, name, lastName, id_user], function (qError,
             result) {
             if (!qError) {
-                res.send(result);
+                res.send("success");
             } else {
                 console.log(qError);
             }
