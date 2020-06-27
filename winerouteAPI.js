@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const history = require('connect-history-api-fallback');
 
 const app = express();
+const staticFileMiddleware = express.static(path.join(__dirname))
 
 app.use(cors({
     credentials: true,
@@ -13,7 +14,9 @@ app.use(cors({
 }))
 
 app.use(express.json());
+app.use(staticFileMiddleware);
 app.use(history());
+app.use(staticFileMiddleware);
 
 var host = process.env.HOST || 'localhost';
 
