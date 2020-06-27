@@ -3,6 +3,7 @@ const cors = require('cors');
 const session = require('express-session');
 //para usar o req.body, body parsing
 const bodyParser = require('body-parser');
+const history = require('connect-history-api-fallback');
 
 const app = express();
 
@@ -12,6 +13,7 @@ app.use(cors({
 }))
 
 app.use(express.json());
+app.use(history());
 
 var host = process.env.HOST || 'localhost';
 
