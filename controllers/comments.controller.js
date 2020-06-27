@@ -28,12 +28,22 @@ function addComments(req, res) {
     })
 }
 
+function getRatings(req, res) {
+    con.query(`SELECT * FROM rating`, (qError, result) => {
+        if (!qError) {
+            return res.send(result);
+        } else {
+            console.log(qError);
+        }
+    })
+}
+
 function addRating(req, res) {
     let id_user = req.sanitize(req.body.id_user);
     let rating_value = req.sanitize(req.body.rating_value);
 
 
-    con.query(`INSERT INTO rating (rating_value) VALUES ('${rating_value}')`, [rating_value, id_user], function (qError,
+    con.query(`INSERT INTO rating (rating_value, id_user) VALUES ('${rating_value}', '${id_user}')`, [rating_value, id_user], function (qError,
         result) {
         if (!qError) {
             return res.send("rating updated");
@@ -43,6 +53,7 @@ function addRating(req, res) {
 }
 
 function updateRating(req, res) {
+    let id_rating = req.sanitize(req.params.id);
     let id_user = req.sanitize(req.body.id_user);
     let rating_value = req.sanitize(req.body.rating_value);
 
@@ -56,7 +67,7 @@ function updateRating(req, res) {
     });
 }
 
-function checkRating(req, res) {
+/* function checkRating(req, res) {
     let id_user = req.sanitize(req.body.id_user);
     let result = ""
 
@@ -64,11 +75,13 @@ function checkRating(req, res) {
         result) {
         if (!qError) {
             result = res.json(result[0].rating_value);
+            updateRating()
         } else
             result = "no rating yet";
+            addRating()
     });
     return (result)
-}
+} */
 
 function getCommentByID(req, res) {
     let id_comment = req.sanitize(req.params.id);
@@ -97,5 +110,8 @@ module.exports = {
     getComments,
     getCommentByID,
     addComments,
-    deleteComment
+    deleteComment,
+    addRating,
+    updateRating,
+    getRatings
 }

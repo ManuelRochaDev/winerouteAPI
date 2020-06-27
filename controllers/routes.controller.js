@@ -47,8 +47,13 @@ function getRouteByID(req, res) {
 function updateRoute(req, res) {
     let id_route = req.sanitize(req.params.id);
     let title = req.sanitize(req.body.title);
+    let city = req.sanitize(req.body.city);
+    let dif = req.sanitize(req.body.dif);
+    let routePois = JSON.stringify(req.body.routePois);
+    let desc = req.sanitize(req.body.desc);
+    let audiolink = req.sanitize(req.body.audiolink);
 
-    con.query("UPDATE route SET title = ? WHERE id_route = ?", [title, id_route], function (qError,
+    con.query("UPDATE route SET title = ?, city = ?, difficulty = ?, routePois = ?, description = ?, audiolink = ? WHERE id_route = ?", [title, city, dif, routePois, desc, audiolink, id_route], function (qError,
         result) {
         if (!qError) {
             res.send(result);
@@ -64,7 +69,7 @@ function deleteRoute(req, res) {
         if (!qError) {
             return res.json(result);
         } else
-        console.log(qError);
+            console.log(qError);
     });
 }
 
