@@ -6,7 +6,6 @@ const bodyParser = require('body-parser');
 const history = require('connect-history-api-fallback');
 
 const app = express();
-const staticFileMiddleware = express.static(path.join(__dirname))
 
 app.use(cors({
     credentials: true,
@@ -14,9 +13,6 @@ app.use(cors({
 }))
 
 app.use(express.json());
-app.use(staticFileMiddleware);
-app.use(history());
-app.use(staticFileMiddleware);
 
 var host = process.env.HOST || 'localhost';
 
@@ -31,6 +27,8 @@ app.use(session({
 app.use(bodyParser.urlencoded({
     extended: false
 }));
+
+
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -54,6 +52,10 @@ app.use(routesRouter);
 app.use(commentsRouter);
 app.use(poisRouter);
 app.use(categoriesRouter);
+
+require('./routes')(app)
+
+app.use(history());
 
 /* var cors_proxy = require('cors-anywhere');
 cors_proxy.createServer({
