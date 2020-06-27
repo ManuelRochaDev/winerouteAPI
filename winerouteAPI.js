@@ -1,10 +1,8 @@
 const express = require('express');
-const path = require('path');
 const cors = require('cors');
 const session = require('express-session');
 //para usar o req.body, body parsing
 const bodyParser = require('body-parser');
-const history = require('connect-history-api-fallback');
 
 const app = express();
 
@@ -25,18 +23,14 @@ app.use(session({
     saveUninitialized: true
 }));
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-});
-
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-
-
-
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
 
 
 
@@ -55,11 +49,6 @@ app.use(routesRouter);
 app.use(commentsRouter);
 app.use(poisRouter);
 app.use(categoriesRouter);
-
-app.use(history({
-    verbose: true
-}));
-app.use('/', express.static(path.join(__dirname, 'dist')));
 
 /* var cors_proxy = require('cors-anywhere');
 cors_proxy.createServer({
