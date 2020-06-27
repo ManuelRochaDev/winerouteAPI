@@ -53,9 +53,10 @@ app.use(commentsRouter);
 app.use(poisRouter);
 app.use(categoriesRouter);
 
-require('./routes')(app)
-
-app.use(history());
+app.use(history({
+    verbose: true
+}));
+app.use('/', express.static(path.join(__dirname, 'dist')));
 
 /* var cors_proxy = require('cors-anywhere');
 cors_proxy.createServer({
