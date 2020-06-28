@@ -54,13 +54,13 @@ function addRating(req, res) {
 }
 
 function updateRating(req, res) {
-    let id_route = req.sanitize(req.body.id_route);
+    let id_route = req.sanitize(req.params.id);
     let id_user = req.sanitize(req.body.id_user);
     let rating_value = req.sanitize(req.body.rating_value);
     /* let id_route = req.sanitize(req.body.id_route); */
 
 
-    con.query("UPDATE rating SET rating_value = ?, id_route = ? WHERE id_user = ?", [rating_value, id_route, id_user], function (qError,
+    con.query("UPDATE rating SET rating_value = ? WHERE id_route = ?, id_user = ?", [rating_value, id_route, id_user], function (qError,
         result) {
         if (!qError) {
             return res.send("rating updated");
