@@ -95,7 +95,7 @@ function updatePassword(req, res) {
     con.query("UPDATE user SET password = ? WHERE id_user = ?", [password, id_user], function (qError,
         result) {
         if (!qError) {
-            res.send(result);
+            res.send("success");
         } else {
             console.log(qError);
         }
