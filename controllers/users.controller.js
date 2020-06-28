@@ -15,7 +15,7 @@ function getUsers(req, res) {
 }
 
 function addUsers(req, res) {
-    let firstName = req.sanitize(req.body.name);
+    let firstName = req.sanitize(req.body.firstName);
     let lastName = req.sanitize(req.body.lastName);
     let email = req.sanitize(req.body.email);
     let password = bcrypt.hashSync(req.body.password, SALT_ROUNDS);
