@@ -60,7 +60,7 @@ function updateRating(req, res) {
     /* let id_route = req.sanitize(req.body.id_route); */
 
 
-    con.query("UPDATE rating SET rating_value = ? WHERE id_route = ?, id_user = ?", [rating_value, id_route, id_user], function (qError,
+    con.query("UPDATE rating SET rating_value = ? WHERE id_route = ? AND id_user = ?", [rating_value, id_route, id_user], function (qError,
         result) {
         if (!qError) {
             return res.send("rating updated");
