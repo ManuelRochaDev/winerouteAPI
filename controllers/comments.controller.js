@@ -65,7 +65,7 @@ function updateRating(req, res) {
         if (!qError) {
             return res.send("rating updated");
         } else
-            console.log(qError);
+            return(qError);
     });
 }
 
