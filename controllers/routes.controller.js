@@ -10,19 +10,29 @@ function getRoutes(req, res) {
     })
 }
 
+function getCategoryByID(id_category) {
+    const sql = "SELECT id_category FROM category WHERE title = ?";
+    return con.query(sql, [id_category]).then(res => {
+        return res[0].id_category
+    });
+}
+
 function addRoutes(req, res) {
     let dif = req.sanitize(req.body.dif);
     let title = req.sanitize(req.body.title);
     let city = req.sanitize(req.body.city);
-    //let category = req.sanitize(req.body.category);
-    //Falta ir buscar a categoria corretamente à BD
+    let id_category = req.sanitize(req.body.category);
+    //ainda não é o ID, é só o nome
+    let actual_id_category = getCategoryByID(id_category);
+    /* let id_category = req.sanitize(req.body.id_category);
+    category = req.sanitize(req.body.category); */
     let desc = req.sanitize(req.body.desc);
     let routePois = JSON.stringify(req.body.routePois);
     let time = req.sanitize(req.body.time);
     let distance = req.sanitize(req.body.distance);
     let audiolink = req.sanitize(req.body.audiolink)
 
-    con.query(`INSERT INTO route (difficulty, distance, time, title, city, id_category, id_user, description, routePois, audiolink) VALUES ('${dif}', '${distance}', '${time}', '${title}', '${city}', '0', '0', '${desc}', '${routePois}', '${audiolink}')`, (qError, result) => {
+    con.query(`INSERT INTO route (difficulty, distance, time, title, city, id_category, id_user, description, routePois, audiolink) VALUES ('${dif}', '${distance}', '${time}', '${title}', '${city}', '${actual_id_category}', '0', '${desc}', '${routePois}', '${audiolink}')`, (qError, result) => {
         if (!qError) {
             console.log("success");
             return res.send("success");
@@ -78,5 +88,6 @@ module.exports = {
     getRouteByID,
     addRoutes,
     updateRoute,
-    deleteRoute
+    deleteRoute,
+    getCategoryByID
 }
