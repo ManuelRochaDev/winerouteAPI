@@ -192,7 +192,7 @@ function deleteUser(req, res) {
     con.query("DELETE from user WHERE id_user = ?", id_user, function (qError,
         result) {
         if (!qError) {
-            return res.json(result);
+            return res.json("success");
         } else
             console.log(qError);
     });
