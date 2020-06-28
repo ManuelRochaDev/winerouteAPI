@@ -168,7 +168,7 @@ function upgradeUser(req, res) {
             con.query("UPDATE user SET userType = 0 WHERE id_user = ?", [id_user], function (qError,
                 result) {
                 if (!qError) {
-                    res.send(result);
+                    res.send("success");
                 } else {
                     console.log(qError);
                 }
@@ -178,7 +178,7 @@ function upgradeUser(req, res) {
             con.query("UPDATE user SET userType = 1 WHERE id_user = ?", [id_user], function (qError,
                 result) {
                 if (!qError) {
-                    res.send(result);
+                    res.send("success");
                 } else {
                     console.log(qError);
                 }
