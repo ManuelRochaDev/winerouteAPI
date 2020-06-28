@@ -61,7 +61,7 @@ function getUserByID(req, res) {
 }
 
 function updateUser(req, res) {
-    let id_user = req.sanitize(req.body.id_user);
+    let id_user = req.sanitize(req.params.id);
     let email = req.sanitize(req.body.email);
     let name = req.sanitize(req.body.name);
     let lastName = req.sanitize(req.body.lastName);
