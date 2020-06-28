@@ -67,7 +67,7 @@ function deleteRoute(req, res) {
     con.query("DELETE from route WHERE id_route = ?", id_route, function (qError,
         result) {
         if (!qError) {
-            return res.json(result);
+            return res.json("success");
         } else
             console.log(qError);
     });
