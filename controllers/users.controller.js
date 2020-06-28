@@ -105,13 +105,12 @@ function updatePassword(req, res) {
 function blockUser(req, res) {
     let id_user = req.sanitize(req.params.id);
     return isBlocked(id_user).then(isBlock => {
-        res.send(isBlock)
         if (isBlock === 1) {
             console.log(isBlock)
             con.query("UPDATE user SET isBlocked = 0 WHERE id_user = ?", [id_user], function (qError,
                 result) {
                 if (!qError) {
-                    res.send(result);
+                    res.send("success");
                 } else {
                     console.log(qError);
                 }
@@ -121,7 +120,7 @@ function blockUser(req, res) {
             con.query("UPDATE user SET isBlocked = 1 WHERE id_user = ?", [id_user], function (qError,
                 result) {
                 if (!qError) {
-                    res.send(result);
+                    res.send("success");
                 } else {
                     console.log(qError);
                 }
