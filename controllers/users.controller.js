@@ -135,10 +135,12 @@ function isBlocked(id_user) {
         /* console.log(res.id_user) */
         if (res[0].isBlocked == 1) {
             console.log("isBlocked: " + res[0].isBlocked)
+            alert("tá bloqueado")
             return 1
         }
         if (res[0].isBlocked == 0) {
             console.log("isBlocked: " + res[0].isBlocked)
+            alert("n tá bloqueado")
             return 0
         }
     });
