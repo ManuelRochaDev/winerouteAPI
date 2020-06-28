@@ -54,7 +54,7 @@ function addRating(req, res) {
 }
 
 function updateRating(req, res) {
-    let id_route = req.sanitize(req.params.id);
+    let id_route = req.sanitize(req.body.id_route);
     let id_user = req.sanitize(req.body.id_user);
     let rating_value = req.sanitize(req.body.rating_value);
     /* let id_route = req.sanitize(req.body.id_route); */
