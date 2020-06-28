@@ -89,7 +89,7 @@ function updateUser(req, res) {
 
 function updatePassword(req, res) {
     let password = bcrypt.hashSync(req.body.password, SALT_ROUNDS);
-    let id_user = req.sanitize(req.body.id_user);
+    let id_user = req.sanitize(req.params.id);
     console.log(id_user)
 
     con.query("UPDATE user SET password = ? WHERE id_user = ?", [password, id_user], function (qError,
