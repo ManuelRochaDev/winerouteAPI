@@ -223,7 +223,7 @@ function loginUser(req, res) {
             if (!bcrypt.compareSync(password, result[0].password)) {
                 //target[0] porque é um array com um único registo
                 message = "wrong password"
-            } else if (result[0].isblocked == 1) {
+            } else if (result[0].isBlocked == 1) {
                 message = "user blocked"
             } else {
                 //se nenhuma das condições for verdade, o login é feito
