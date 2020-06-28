@@ -22,8 +22,6 @@ function addRoutes(req, res) {
     let title = req.sanitize(req.body.title);
     let city = req.sanitize(req.body.city);
     let id_category = req.sanitize(req.body.category);
-    //ainda não é o ID, é só o nome
-    let actual_id_category = getCategoryByID(id_category);
     /* let id_category = req.sanitize(req.body.id_category);
     category = req.sanitize(req.body.category); */
     let desc = req.sanitize(req.body.desc);
@@ -32,7 +30,7 @@ function addRoutes(req, res) {
     let distance = req.sanitize(req.body.distance);
     let audiolink = req.sanitize(req.body.audiolink)
 
-    con.query(`INSERT INTO route (difficulty, distance, time, title, city, id_category, id_user, description, routePois, audiolink) VALUES ('${dif}', '${distance}', '${time}', '${title}', '${city}', '${actual_id_category}', '0', '${desc}', '${routePois}', '${audiolink}')`, (qError, result) => {
+    con.query(`INSERT INTO route (difficulty, distance, time, title, city, id_category, id_user, description, routePois, audiolink) VALUES ('${dif}', '${distance}', '${time}', '${title}', '${city}', '${id_category}', '0', '${desc}', '${routePois}', '${audiolink}')`, (qError, result) => {
         if (!qError) {
             console.log("success");
             return res.send("success");
